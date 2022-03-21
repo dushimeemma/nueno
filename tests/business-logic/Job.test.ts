@@ -27,7 +27,7 @@ describe("Job", () => {
 
       expect(job.title).toBe(requestParams.title);
       expect(job.description).toBe(requestParams.description);
-    });
+    }, 60000);
 
     it("throws error if user was not found", async () => {
       await minimalSetup();
@@ -43,7 +43,7 @@ describe("Job", () => {
       await expect(async () => {
         await entity.create(requestParams, nonExistingUserId);
       }).rejects.toThrowError("Not found");
-    });
+    }, 60000);
   });
 
   describe("#list", () => {
@@ -56,7 +56,7 @@ describe("Job", () => {
       const result = await entity.list(user.id);
 
       expect(result.length).toBe(2);
-    });
+    }, 60000);
 
     it("throws error if user was not found", async () => {
       await minimalSetup();
@@ -67,6 +67,6 @@ describe("Job", () => {
       await expect(async () => {
         await entity.list(nonExistingUserId);
       }).rejects.toThrowError("Not found");
-    });
+    }, 60000);
   });
 });
